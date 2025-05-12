@@ -1,27 +1,28 @@
 package screenmatch.modelos;
 
-public class Filme {
-    String nome;
-    int anoDeLancamento;
-    boolean incluindoNoPlano;
-    private double somaDasAvaliacoes;
-    private int totalDeAvaliacoes;
-    int duracaoEmMinutos;
+import screenmatch.calculos.Classificavel;
 
-    int getTotalDeAvaliacoes(){
-        return totalDeAvaliacoes;
+public class Filme extends Titulo implements Classificavel {
+    private String diretor;
+
+    public Filme(String nome, int anoDeLancamento) {
+        super(nome, anoDeLancamento);
     }
 
-    void exibeFichaTecnica() {
-        System.out.println("Nome do filme: "+ nome);
-        System.out.println("Ano de lançamento: "+ anoDeLancamento);
+    public String getDiretor() {
+        return diretor;
     }
-    void avaliaFilme(double nota) {
-        somaDasAvaliacoes += nota;
-        totalDeAvaliacoes++;
+    public void setDiretor(String diretor) {
+        this.diretor = diretor;
     }
 
-    double pegaMedia() {
-        return somaDasAvaliacoes / totalDeAvaliacoes;}
+    @Override
+    public int getClassificacao() {
+        return (int) pegaMedia() / 2;
+    }
 
+    @Override
+    public String toString() {
+        return "Filme: " + this.getNome() + " (" + this.getAnoDeLancamento() + ")";
+    }
 }
